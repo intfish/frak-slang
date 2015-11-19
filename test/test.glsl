@@ -16,6 +16,9 @@ uniform vec4 magic;
 
 varying vec2 uv0;
 
+const float bias = 0.001;
+vec2 scale = vec2(0.5, 0.5);
+
 vec4 lighting() {
 	vec4 textureColor = texture2D(diffuse0, uv0);
 	return textureColor;
