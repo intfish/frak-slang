@@ -8,6 +8,7 @@ function inspect(o) {
 }
 
 var preprocess = require('../src/preprocess');
+var compiler = require('../src/compiler');
 
 function getSource(file, parent, done) {
 	//console.log('getSource(%s, %s)', file, parent);
@@ -37,4 +38,16 @@ test('Preprocessor', function(t) {
 		t.equal(compiledSource, src_success, 'Preprocessed code is correct');
 		t.end();
 	});
+});
+
+
+test('Compiler', function(t) {
+	var file = path.join(__dirname, 'test.glsl');
+	var src = fs.readFileSync(file).toString();
+
+	var result = compiler(src);
+	t.notEqual(result, null);
+	console.log(result);
+
+	t.end();
 });
