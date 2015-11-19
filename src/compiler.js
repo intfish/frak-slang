@@ -11,11 +11,13 @@ function getDeclarationsWithQualifier(ast, qualifier) {
 	var result = {};
 	for (var i=0; i<list.length; i++) {
 		var item = list[i].parent;
+		var itemType = list[i].name;
 		var identifier = glsl.query.first(item, selectIdentifiers);
 		if (!identifier)
 			continue;
 		result[identifier.name] = {
 			name: identifier.name,
+			type: itemType,
 			ast: item
 		};
 	}
@@ -49,11 +51,13 @@ function getGlobals(ast) {
 	var list = glsl.query.all(ast, selectGlobals);
 	for (var i=0; i<list.length; i++) {
 		var item = list[i].parent;
+		var itemType = list[i].name;
 		var identifier = glsl.query.first(item, selectIdentifiers);
 		if (!identifier)
 			continue;
 		result[identifier.name] = {
 			name: identifier.name,
+			type: itemType,
 			ast: item
 		};
 	}
