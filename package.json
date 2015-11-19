@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Lightweight GLSL preprocessor for FRAK Engine",
   "main": "index.js",
+  "bin": {
+  	"frak-slang": "cli.js"
+  },
   "scripts": {
     "test": "node test/index | tap-spec"
   },
