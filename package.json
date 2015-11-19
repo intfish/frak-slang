@@ -1,0 +1,29 @@
+{
+  "name": "frak-slang",
+  "version": "1.0.0",
+  "description": "Lightweight GLSL preprocessor for FRAK Engine",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/index | tap-spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lammas/frak-slang.git"
+  },
+  "keywords": [
+    "FRAK",
+    "GLSL",
+    "shader"
+  ],
+  "author": "lammas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lammas/frak-slang/issues"
+  },
+  "homepage": "https://github.com/lammas/frak-slang#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "tap-spec": "^4.1.0",
+    "tape": "^4.2.2"
+  }
+}
