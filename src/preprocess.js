@@ -1,5 +1,7 @@
 var extend = require('./extend');
 
+var included = {};
+
 function includes(source, parent) {
 	var INCLUDES = /^(#include)\s+"([^"\\]*(\\.[^"\\]*)*)"[ ]*\r?(?:\n|$)/mg;
 	var list = [];
@@ -45,8 +47,14 @@ function load(list, fnGetSource, fnDone) {
 		}
 
 		fnGetSource(item.include, parentInclude, function(source, resolvedInclude) {
+			var resolved = resolvedInclude || item.include;
+			if (resolved in included) {
+				item.content = '';
+				return next();
+			}
 			item.content = source;
-			item.includeResolved = resolvedInclude;
+			item.includeResolved = resolved;
+			included[resolved] = true;
 			next();
 		});
 	})();
@@ -83,9 +91,13 @@ function join(list) {
 
 function preprocess(source, options, done) {
 	options = extend({
-		include: function(file, parent, done) { done("// include: " + file + "\n"); }
+		include: function(file, parent, done) { done("// include: " + file + "\n"); },
+		sourceURI: false
 	}, options);
 
+	included = {};
+	if (options.sourceURI)
+		included[options.sourceURI] = true;
 	var parts = includes(source, null);
 	parse(parts, options, function() {
 		done(join(parts));

@@ -32,7 +32,24 @@ test('Preprocessor', function(t) {
 	var src_success = fs.readFileSync(file_success).toString();
 
 	frakSlang.preprocess(src, {
-		include: getSource
+		include: getSource,
+		sourceURI: file
+	}, function(compiledSource) {
+		t.equal(compiledSource, src_success, 'Preprocessed code is correct');
+		t.end();
+	});
+});
+
+test('Preprocessor - circular include', function(t) {
+	var file = path.join(__dirname, 'circular.glsl');
+	var src = fs.readFileSync(file).toString();
+
+	var file_success = path.join(__dirname, 'circular_success.glsl');
+	var src_success = fs.readFileSync(file_success).toString();
+
+	frakSlang.preprocess(src, {
+		include: getSource,
+		sourceURI: file
 	}, function(compiledSource) {
 		t.equal(compiledSource, src_success, 'Preprocessed code is correct');
 		t.end();
