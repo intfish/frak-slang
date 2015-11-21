@@ -62,8 +62,25 @@ test('Extractor', function(t) {
 	var src = fs.readFileSync(file).toString();
 
 	var result = frakSlang.extract(src);
-	t.notEqual(result, null);
-	console.log(result);
+	t.notEqual(result, null, 'Parsing successful');
+	t.ok('position' in result.attributes, 'position attribute extracted');
+	t.ok('normal' in result.attributes, 'normal attribute extracted');
+	t.ok('texcoord2d0' in result.attributes, 'texcoord2d0 attribute extracted');
+
+	t.ok('projection' in result.uniforms, 'uniform "projection" extracted');
+	t.ok('modelview' in result.uniforms, 'uniform "modelview" extracted');
+	t.ok('diffuse' in result.uniforms, 'uniform "diffuse" extracted');
+	t.ok('diffuse0' in result.uniforms, 'uniform "diffuse0" extracted');
+	t.ok('magic' in result.uniforms, 'uniform "magic" extracted');
+
+	t.ok('uv0' in result.varyings, 'varying "uv0" extracted');
+
+	t.ok('bias' in result.globals, 'global "bias" extracted');
+	t.ok('scale' in result.globals, 'global "scale" extracted');
+
+	t.ok('lighting' in result.functions, 'function "lighting" extracted');
+	t.ok('fragment' in result.functions, 'function "fragment" extracted');
+	t.ok('vertex' in result.functions, 'function "vertex" extracted');
 
 	t.end();
 });
