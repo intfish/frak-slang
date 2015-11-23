@@ -4,7 +4,7 @@
   "description": "Lightweight GLSL preprocessor for FRAK Engine",
   "main": "index.js",
   "bin": {
-  	"frak-slang": "cli.js"
+    "frak-slang": "cli.js"
   },
   "scripts": {
     "test": "node test/index | tap-spec"
@@ -24,7 +24,9 @@
     "url": "https://github.com/lammas/frak-slang/issues"
   },
   "homepage": "https://github.com/lammas/frak-slang#readme",
-  "dependencies": {},
+  "dependencies": {
+    "glsl-man": "^1.0.0"
+  },
   "devDependencies": {
     "tap-spec": "^4.1.0",
     "tape": "^4.2.2"
