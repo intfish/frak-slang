@@ -84,3 +84,19 @@ test('Extractor', function(t) {
 
 	t.end();
 });
+
+
+test('Compiler', function(t) {
+	var file = path.join(__dirname, 'test.glsl');
+	var src = fs.readFileSync(file).toString();
+
+	var result = frakSlang.extract(src);
+	var compiled = frakSlang.compile(result);
+
+	t.notEqual(result, null, 'Parsing successful');
+	t.notEqual(compiled, null, 'Compiling successful');
+
+	console.log(compiled);
+
+	t.end();
+});

@@ -60,6 +60,12 @@ function getGlobals(ast) {
 	return result;
 }
 
+function getPreprocessor(ast) {
+	var selector = glsl.query.selector('root > preprocessor');
+	var list = glsl.query.all(ast, selector);
+	return list;
+}
+
 function extract(source) {
 	var ast = glsl.parse(source);
 	if (!ast)
@@ -71,6 +77,7 @@ function extract(source) {
 		varyings: getDeclarationsWithQualifier(ast, 'varying'),
 		globals: getGlobals(ast),
 		functions: getFunctionDeclarations(ast),
+		preprocessor: getPreprocessor(ast)
 	};
 	return result;
 }
