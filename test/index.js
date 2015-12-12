@@ -10,7 +10,6 @@ function inspect(o) {
 }
 
 function getSource(file, parent, done) {
-	//console.log('getSource(%s, %s)', file, parent);
 	if (!parent) {
 		file = path.join(__dirname, file);
 	}
@@ -96,7 +95,15 @@ test('Compiler', function(t) {
 	t.notEqual(result, null, 'Parsing successful');
 	t.notEqual(compiled, null, 'Compiling successful');
 
-	console.log(compiled);
+	//console.log('#### AST');
+	//inspect(result.ast);
+	//console.log('########');
+
+	console.log('\nVertex program:');
+	console.log(compiled.vertex);
+
+	console.log('\nFragment program:');
+	console.log(compiled.fragment);
 
 	t.end();
 });

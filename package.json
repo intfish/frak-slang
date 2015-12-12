@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/lammas/frak-slang#readme",
   "dependencies": {
+    "dependency-graph": "^0.4.1",
     "glsl-man": "^1.0.0"
   },
   "devDependencies": {
