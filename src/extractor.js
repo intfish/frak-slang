@@ -1,3 +1,5 @@
+'use strict';
+
 var glsl = require('glsl-man');
 
 function getDeclarationsWithQualifier(ast, qualifier) {

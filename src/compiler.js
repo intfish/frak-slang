@@ -1,5 +1,15 @@
+'use strict';
+
 var glsl = require('glsl-man');
 var DepGraph = require('dependency-graph').DepGraph;
+var extend = require('./extend');
+
+var DEFAULT_DEFINES = {
+	__VERTEX__: false,
+	__FRAGMENT__: false,
+
+};
+
 
 function getUniformOrGlobal(name, data) {
 	if (name in data.uniforms)
@@ -46,9 +56,12 @@ function dependencies(fn, data, result) {
 	return result;
 }
 
-function compileVertex(data, strOpt) {
+function compileVertex(data, strOpt, defines) {
 	if (!('vertex' in data.functions))
 		throw new Error('No vertex() function found.');
+
+	defines.__VERTEX__ = true;
+	defines.__FRAGMENT__ = false;
 
 	var scope = glsl.wrap();
 
@@ -83,12 +96,16 @@ function compileVertex(data, strOpt) {
 	}
 
 	vert.ast.name = 'main';
+	defines.__VERTEX__ = false;
 	return glsl.string(scope, strOpt);
 }
 
-function compileFragment(data, strOpt) {
+function compileFragment(data, strOpt, defines) {
 	if (!('fragment' in data.functions))
 		throw new Error('No fragment() function found.');
+
+	defines.__VERTEX__ = false;
+	defines.__FRAGMENT__ = true;
 
 	var scope = glsl.wrap();
 
@@ -117,10 +134,14 @@ function compileFragment(data, strOpt) {
 	}
 
 	frag.ast.name = 'main';
+	defines.__FRAGMENT__ = false;
 	return glsl.string(scope, strOpt);
 }
 
-function compile(extracted) {
+function compile(extracted, defines) {
+	defines = extend(DEFAULT_DEFINES, defines);
+	console.log('Defines: ', defines);
+
 	var stringifyOptions = {};
 
 	if ('main' in extracted.functions) {
@@ -133,8 +154,8 @@ function compile(extracted) {
 	}*/
 
 	var shaders = {
-		vertex: compileVertex(extracted, stringifyOptions),
-		fragment: compileFragment(extracted, stringifyOptions)
+		vertex: compileVertex(extracted, stringifyOptions, defines),
+		fragment: compileFragment(extracted, stringifyOptions, defines)
 	};
 	return shaders;
 }

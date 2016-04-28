@@ -1,3 +1,5 @@
+'use strict';
+
 var extend = require('./extend');
 
 var included = {};
@@ -6,6 +8,7 @@ function includes(source, parent) {
 	var INCLUDES = /^(#include)\s+"([^"\\]*(\\.[^"\\]*)*)"[ ]*\r?(?:\n|$)/mg;
 	var list = [];
 	var previousIndex = 0;
+	var match;
 	while ((match = INCLUDES.exec(source)) !== null) {
 		var preceding = source.substring(previousIndex, match.index);
 		previousIndex = INCLUDES.lastIndex;

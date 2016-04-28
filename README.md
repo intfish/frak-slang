@@ -11,6 +11,9 @@ Lightweight GLSL preprocessor for [FRAK Engine](https://github.com/lammas/frak).
 * Extract shader parameters (attributes/uniforms/varyings)
 * Command line tool for integrating into build scripts
 
+## Limitations
+
+* Currently preprocessor directives inside functions are not evaluated
 
 ## Install
 

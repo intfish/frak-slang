@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Utility for extending an options object.
  */
