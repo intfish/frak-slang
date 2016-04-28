@@ -4,16 +4,18 @@ Lightweight GLSL preprocessor for [FRAK Engine](https://github.com/lammas/frak).
 
 ## Features
 
-* Define uniforms/attributes/varyings only once
-* Includes
-* Have both vertex and fragment shader entrypoints in the same file
-* Transpiles into standard GLSL vertex and fragment shader
-* Extract shader parameters (attributes/uniforms/varyings)
+* Declare uniforms/attributes/varyings only once
+* #include
+* Have both vertex and fragment shader entry points in the same file
+* Transpile into standard GLSL vertex and fragment shader
+* Unused variables and functions are culled
+* Extract shader parameters
 * Command line tool for integrating into build scripts
 
 ## Limitations
 
-* Preprocessor directives inside functions are not handled
+* #ifdef / #ifndef directives inside functions are not evauluated
+* Unused variables and functions inside preprocessor directives are not culled
 
 ## Install
 
@@ -33,4 +35,3 @@ TODO
 ```
 TODO
 ```
-

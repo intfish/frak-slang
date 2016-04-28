@@ -1,6 +1,6 @@
 {
   "name": "frak-slang",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Lightweight GLSL preprocessor for FRAK Engine",
   "main": "index.js",
   "bin": {

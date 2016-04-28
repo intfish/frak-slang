@@ -23,88 +23,86 @@ function getSource(file, parent, done) {
 	});
 }
 
-// test('Preprocessor', function(t) {
-// 	var file = path.join(__dirname, 'preprocess.glsl');
-// 	var src = fs.readFileSync(file).toString();
-//
-// 	var file_success = path.join(__dirname, 'preprocess_success.glsl');
-// 	var src_success = fs.readFileSync(file_success).toString();
-//
-// 	frakSlang.preprocess(src, {
-// 		include: getSource,
-// 		sourceURI: file
-// 	}, function(compiledSource) {
-// 		t.equal(compiledSource, src_success, 'Preprocessed code is correct');
-// 		t.end();
-// 	});
-// });
-//
-// test('Preprocessor - circular include', function(t) {
-// 	var file = path.join(__dirname, 'circular.glsl');
-// 	var src = fs.readFileSync(file).toString();
-//
-// 	var file_success = path.join(__dirname, 'circular_success.glsl');
-// 	var src_success = fs.readFileSync(file_success).toString();
-//
-// 	frakSlang.preprocess(src, {
-// 		include: getSource,
-// 		sourceURI: file
-// 	}, function(compiledSource) {
-// 		t.equal(compiledSource, src_success, 'Preprocessed code is correct');
-// 		t.end();
-// 	});
-// });
-//
-//
-// test('Extractor', function(t) {
-// 	var file = path.join(__dirname, 'test.glsl');
-// 	var src = fs.readFileSync(file).toString();
-//
-// 	var result = frakSlang.extract(src);
-// 	t.notEqual(result, null, 'Parsing successful');
-// 	t.ok('position' in result.attributes, 'position attribute extracted');
-// 	t.ok('normal' in result.attributes, 'normal attribute extracted');
-// 	t.ok('texcoord2d0' in result.attributes, 'texcoord2d0 attribute extracted');
-//
-// 	t.ok('projection' in result.uniforms, 'uniform "projection" extracted');
-// 	t.ok('modelview' in result.uniforms, 'uniform "modelview" extracted');
-// 	t.ok('diffuse' in result.uniforms, 'uniform "diffuse" extracted');
-// 	t.ok('diffuse0' in result.uniforms, 'uniform "diffuse0" extracted');
-// 	t.ok('magic' in result.uniforms, 'uniform "magic" extracted');
-//
-// 	t.ok('uv0' in result.varyings, 'varying "uv0" extracted');
-//
-// 	t.ok('bias' in result.globals, 'global "bias" extracted');
-// 	t.ok('scale' in result.globals, 'global "scale" extracted');
-//
-// 	t.ok('lighting' in result.functions, 'function "lighting" extracted');
-// 	t.ok('fragment' in result.functions, 'function "fragment" extracted');
-// 	t.ok('vertex' in result.functions, 'function "vertex" extracted');
-//
-// 	t.end();
-// });
+test('Preprocessor', function(t) {
+	var file = path.join(__dirname, 'preprocess.glsl');
+	var src = fs.readFileSync(file).toString();
+
+	var file_success = path.join(__dirname, 'preprocess_success.glsl');
+	var src_success = fs.readFileSync(file_success).toString();
+
+	frakSlang.preprocess(src, {
+		include: getSource,
+		sourceURI: file
+	}, function(compiledSource) {
+		t.equal(compiledSource, src_success, 'Preprocessed code is correct');
+		t.end();
+	});
+});
+
+test('Preprocessor - circular include', function(t) {
+	var file = path.join(__dirname, 'circular.glsl');
+	var src = fs.readFileSync(file).toString();
+
+	var file_success = path.join(__dirname, 'circular_success.glsl');
+	var src_success = fs.readFileSync(file_success).toString();
+
+	frakSlang.preprocess(src, {
+		include: getSource,
+		sourceURI: file
+	}, function(compiledSource) {
+		t.equal(compiledSource, src_success, 'Preprocessed code is correct');
+		t.end();
+	});
+});
 
 
-test('Compiler', function(t) {
+test('Extractor', function(t) {
 	var file = path.join(__dirname, 'test.glsl');
 	var src = fs.readFileSync(file).toString();
 
+	var result = frakSlang.extract(src);
+	t.notEqual(result, null, 'Parsing successful');
+	t.ok('position' in result.attributes, 'position attribute extracted');
+	t.ok('normal' in result.attributes, 'normal attribute extracted');
+	t.ok('texcoord2d0' in result.attributes, 'texcoord2d0 attribute extracted');
+
+	t.ok('projection' in result.uniforms, 'uniform "projection" extracted');
+	t.ok('modelview' in result.uniforms, 'uniform "modelview" extracted');
+	t.ok('diffuse' in result.uniforms, 'uniform "diffuse" extracted');
+	t.ok('diffuse0' in result.uniforms, 'uniform "diffuse0" extracted');
+	t.ok('magic' in result.uniforms, 'uniform "magic" extracted');
+
+	t.ok('uv0' in result.varyings, 'varying "uv0" extracted');
+
+	t.ok('bias' in result.globals, 'global "bias" extracted');
+	t.ok('scale' in result.globals, 'global "scale" extracted');
+
+	t.ok('lighting' in result.functions, 'function "lighting" extracted');
+	t.ok('fragment' in result.functions, 'function "fragment" extracted');
+	t.ok('vertex' in result.functions, 'function "vertex" extracted');
+
+	t.end();
+});
+
+
+test('Compiler', function(t) {
+	var src = fs.readFileSync(path.join(__dirname, 'test.glsl')).toString();
+	var vert_success = fs.readFileSync(path.join(__dirname, 'test_success.vert')).toString();
+	var frag_success = fs.readFileSync(path.join(__dirname, 'test_success.frag')).toString();
+
 	var extracted = frakSlang.extract(src);
-
-	//console.log('#### AST');
-	//inspect(extracted.ast);
-	//console.log('########');
-
 	var compiled = frakSlang.compile(extracted);
 
 	t.notEqual(extracted, null, 'Parsing successful');
 	t.notEqual(compiled, null, 'Compiling successful');
 
-	console.log('\nVertex program:');
-	console.log(compiled.vertex);
+	t.equal(compiled.vertex, vert_success, 'Vertex OK');
+	t.equal(compiled.fragment, frag_success, 'Fragment OK');
 
-	console.log('\nFragment program:');
-	console.log(compiled.fragment);
+	// console.log('\nVertex program:');
+	// console.log(compiled.vertex);
+	// console.log('\nFragment program:');
+	// console.log(compiled.fragment);
 
 	t.end();
 });

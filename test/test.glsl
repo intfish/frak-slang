@@ -3,7 +3,7 @@
 precision highp float;
 #endif
 
-precision mediump int;
+precision highp int;
 
 attribute vec3 position;
 attribute vec3 normal;
@@ -26,6 +26,10 @@ uniform vec3 vertOnlyUniform;
 
 #ifdef __FRAGMENT__
 uniform vec3 fragOnlyUniform;
+#endif
+
+#ifndef __VERTEX__
+uniform int alwaysIncludedInFragment;
 #endif
 
 varying vec2 uv0;
