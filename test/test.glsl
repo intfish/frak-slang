@@ -3,7 +3,7 @@
 precision highp float;
 #endif
 
-precision highp int;
+precision mediump int;
 
 attribute vec3 position;
 attribute vec3 normal;
@@ -31,7 +31,16 @@ uniform vec3 fragOnlyUniform;
 varying vec2 uv0;
 
 const float bias = 0.001;
-vec2 scale = vec2(0.5, 0.5);
+vec3 scale = vec3(0.5, 0.5, 0.5);
+
+// Parser does not handle this
+// struct TheStruct
+// {
+// 	vec3 first;
+// 	vec4 second;
+// 	mat4x3 third;
+// };
+// uniform TheStruct aUniformOfArrayType;
 
 float unused(float a) {
 	return a * a;
@@ -42,6 +51,7 @@ vec4 lighting() {
 #ifdef DISABLE_RED
 	textureColor.r = 0.0;
 #endif
+	textureColor.a += bias;
 	return textureColor;
 }
 
@@ -52,5 +62,5 @@ void fragment(void) {
 
 void vertex() {
 	uv0 = texcoord2d0;
-	gl_Position = projection * modelview * vec4(position, 1.0);
+	gl_Position = projection * modelview * vec4(position * scale, 1.0);
 }

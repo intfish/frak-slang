@@ -62,7 +62,7 @@ function getGlobals(ast) {
 	return result;
 }
 
-function getPreprocessor(ast) {
+function getPreprocessorDirectives(ast) {
 	var selector = glsl.query.selector('root > preprocessor');
 	var list = glsl.query.all(ast, selector);
 	return list;
@@ -79,9 +79,15 @@ function extract(source) {
 		varyings: getDeclarationsWithQualifier(ast, 'varying'),
 		globals: getGlobals(ast),
 		functions: getFunctionDeclarations(ast),
-		preprocessor: getPreprocessor(ast)
+		preprocessor: getPreprocessorDirectives(ast)
 	};
 	return result;
 }
 
-module.exports = extract;
+module.exports = {
+	extract: extract,
+	getPreprocessorDirectives: getPreprocessorDirectives,
+	getDeclarationsWithQualifier: getDeclarationsWithQualifier,
+	getFunctionDeclarations: getFunctionDeclarations,
+	getGlobals: getGlobals
+}
