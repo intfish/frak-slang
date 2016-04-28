@@ -13,7 +13,7 @@ Lightweight GLSL preprocessor for [FRAK Engine](https://github.com/lammas/frak).
 
 ## Limitations
 
-* Currently preprocessor directives inside functions are not evaluated
+* Preprocessor directives inside functions are not handled
 
 ## Install
 

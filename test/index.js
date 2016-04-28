@@ -90,14 +90,16 @@ test('Compiler', function(t) {
 	var src = fs.readFileSync(file).toString();
 
 	var result = frakSlang.extract(src);
+
+	//console.log('#### AST');
+	//inspect(result.ast);
+	//console.log('########');
+
 	var compiled = frakSlang.compile(result);
 
 	t.notEqual(result, null, 'Parsing successful');
 	t.notEqual(compiled, null, 'Compiling successful');
 
-	//console.log('#### AST');
-	//inspect(result.ast);
-	//console.log('########');
 
 	console.log('\nVertex program:');
 	console.log(compiled.vertex);

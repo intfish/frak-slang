@@ -140,7 +140,6 @@ function compileFragment(data, strOpt, defines) {
 
 function compile(extracted, defines) {
 	defines = extend(DEFAULT_DEFINES, defines);
-	console.log('Defines: ', defines);
 
 	var stringifyOptions = {};
 
