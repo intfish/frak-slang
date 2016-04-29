@@ -5,7 +5,7 @@ Lightweight GLSL preprocessor for [FRAK Engine](https://github.com/lammas/frak).
 ## Features
 
 * Declare uniforms/attributes/varyings only once
-* #include
+* &#35;include
 * Have both vertex and fragment shader entry points in the same file
 * Transpile into standard GLSL vertex and fragment shader
 * Unused variables and functions are culled
@@ -14,7 +14,7 @@ Lightweight GLSL preprocessor for [FRAK Engine](https://github.com/lammas/frak).
 
 ## Limitations
 
-* #ifdef / #ifndef directives inside functions are not evauluated
+* Preprocessor directives inside functions are not evauluated
 * Unused variables and functions inside preprocessor directives are not culled
 * Comments on the same line as #include directives are not handled
 
@@ -30,7 +30,10 @@ npm install frak-slang
 var FRAKSlang = require('frak-slang');
 
 FRAKSlang.compile(glslSource, {
-    include: handleIncludedFiles(includedFile, parentFile, done) { /* ... */ },
+    include: handleIncludedFiles(includedFile, parentFile, done) {
+        /* ... */
+        done(includedFileData, includedFilePath);
+    },
     sourceURI: 'main/glsl/file/location'
 }, function(compiled) {
     // compiled = {
