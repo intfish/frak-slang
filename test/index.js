@@ -16,7 +16,7 @@ function getSource(file, parent, done) {
 	else {
 		file = path.join(path.dirname(parent), file);
 	}
-	var src = fs.readFile(file, 'utf8', function(err, data) {
+	fs.readFile(file, 'utf8', function(err, data) {
 		if (err)
 			throw err;
 		done(data, file);
@@ -91,7 +91,7 @@ test('Compiler', function(t) {
 	var frag_success = fs.readFileSync(path.join(__dirname, 'test_success.frag')).toString();
 
 	var extracted = frakSlang.extract(src);
-	var compiled = frakSlang.compile(extracted);
+	var compiled = frakSlang.compileExtracted(extracted);
 
 	t.notEqual(extracted, null, 'Parsing successful');
 	t.notEqual(compiled, null, 'Compiling successful');

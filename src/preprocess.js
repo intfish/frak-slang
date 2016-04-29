@@ -95,13 +95,20 @@ function join(list) {
 function preprocess(source, options, done) {
 	options = extend({
 		include: function(file, parent, done) { done("// include: " + file + "\n"); },
-		sourceURI: false
+		sourceURI: null
 	}, options);
 
 	included = {};
 	if (options.sourceURI)
 		included[options.sourceURI] = true;
-	var parts = includes(source, null);
+
+	var rootNode = {
+		preceding: '',
+		include: options.sourceURI,
+		children: [],
+		parent: null
+	};
+	var parts = includes(source, rootNode);
 	parse(parts, options, function() {
 		done(join(parts));
 	});
