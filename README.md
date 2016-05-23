@@ -24,6 +24,9 @@ Lightweight GLSL preprocessor for [FRAK Engine](https://github.com/lammas/frak).
 npm install frak-slang
 ```
 
+[![NPM](https://nodei.co/npm/frak-slang.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/frak-slang/)
+
+
 ## Usage (as library)
 
 ```javascript
