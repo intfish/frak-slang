@@ -33,7 +33,8 @@ npm install frak-slang
 var FRAKSlang = require('frak-slang');
 
 FRAKSlang.compile(glslSource, {
-    include: handleIncludedFiles(includedFile, parentFile, done) {
+    // handle included files
+    include: function(includedFile, parentFile, done) {
         /* ... */
         done(includedFileData, includedFilePath);
     },
