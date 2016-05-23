@@ -1,6 +1,8 @@
 # frak-slang
 Lightweight GLSL preprocessor for [FRAK Engine](https://github.com/lammas/frak).
 
+[![NPM](https://nodei.co/npm/frak-slang.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/frak-slang/)
+
 
 ## Features
 
@@ -12,19 +14,19 @@ Lightweight GLSL preprocessor for [FRAK Engine](https://github.com/lammas/frak).
 * Extract shader parameters
 * Command line tool for integrating into build scripts
 
+
 ## Limitations
 
 * Preprocessor directives inside functions are not evauluated
 * Unused variables and functions inside preprocessor directives are not culled
 * Comments on the same line as #include directives are not handled
 
+
 ## Install
 
 ```sh
 npm install frak-slang
 ```
-
-[![NPM](https://nodei.co/npm/frak-slang.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/frak-slang/)
 
 
 ## Usage (as library)
