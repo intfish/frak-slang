@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lammas/frak-slang.git"
+    "url": "git+https://github.com/intfish/frak-slang.git"
   },
   "keywords": [
     "FRAK",
@@ -21,9 +21,9 @@
   "author": "lammas",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lammas/frak-slang/issues"
+    "url": "https://github.com/intfish/frak-slang/issues"
   },
-  "homepage": "https://github.com/lammas/frak-slang#readme",
+  "homepage": "https://github.com/intfish/frak-slang#readme",
   "dependencies": {
     "commander": "^2.9.0",
     "dependency-graph": "^0.4.1",
