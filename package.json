@@ -14,8 +14,8 @@
     "url": "git+https://github.com/intfish/frak-slang.git"
   },
   "keywords": [
-    "FRAK",
-    "GLSL",
+    "frak",
+    "glsl",
     "shader"
   ],
   "author": "lammas",
