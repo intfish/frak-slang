@@ -17,7 +17,7 @@ Lightweight GLSL preprocessor for [FRAK Engine](https://github.com/lammas/frak).
 
 ## Limitations
 
-* Preprocessor directives inside functions are not evauluated
+* Preprocessor directives inside functions are not evaluated
 * Unused variables and functions inside preprocessor directives are not culled
 * Comments on the same line as #include directives are not handled
 
