@@ -125,6 +125,10 @@ function compileRootStatements(statements, scope, deps, defines, isVertex) {
 				}
 				break;
 
+			case 'struct_definition':
+				scope.statements.push(stmt);
+				break;
+
 			default:
 				throw new Error('Compiler issue: unhandled statement of type `' + stmt.type + '`');
 		}

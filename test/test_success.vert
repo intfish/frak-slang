@@ -14,6 +14,10 @@ uniform vec4 magic;
 uniform vec3 vertOnlyUniform;
 varying vec2 uv0;
 vec3 scale = vec3(0.5, 0.5, 0.5);
+struct Value {
+	vec4 color;
+	float second;
+};
 void main() {
 	uv0 = texcoord2d0;
 	gl_Position = (projection * modelview) * vec4(position * scale, 1.0);

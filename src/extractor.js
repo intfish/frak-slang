@@ -42,6 +42,20 @@ function getFunctionDeclarations(ast) {
 	return result;
 }
 
+function getStructDeclarations(ast) {
+	var selector = glsl.query.selector('struct_definition');
+	var list = glsl.query.all(ast, selector);
+	var result = {};
+	for (var i=0; i<list.length; i++) {
+		var struct = list[i];
+		result[struct.name] = {
+			name: struct.name,
+			ast: struct
+		};
+	}
+	return result;
+}
+
 function getGlobals(ast) {
 	var selectIdentifiers = glsl.query.selector('identifier');
 	var selectGlobals = glsl.query.selector('root > declarator[typeAttribute] > type:not([qualifier])');
@@ -78,6 +92,7 @@ function extract(source) {
 		uniforms: getDeclarationsWithQualifier(ast, 'uniform'),
 		varyings: getDeclarationsWithQualifier(ast, 'varying'),
 		globals: getGlobals(ast),
+		structs: getStructDeclarations(ast),
 		functions: getFunctionDeclarations(ast),
 		preprocessor: getPreprocessorDirectives(ast)
 	};
@@ -89,5 +104,6 @@ module.exports = {
 	getPreprocessorDirectives: getPreprocessorDirectives,
 	getDeclarationsWithQualifier: getDeclarationsWithQualifier,
 	getFunctionDeclarations: getFunctionDeclarations,
+	getStructDeclarations: getStructDeclarations,
 	getGlobals: getGlobals
 }

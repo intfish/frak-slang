@@ -11,15 +11,20 @@ uniform vec3 fragOnlyUniform;
 uniform int alwaysIncludedInFragment;
 varying vec2 uv0;
 const float bias = 0.001;
-vec4 lighting() {
-	vec4 textureColor = texture2D(diffuse0, uv0);
+struct Value {
+	vec4 color;
+	float second;
+};
+Value lighting() {
+	Value value;
+	value.color = texture2D(diffuse0, uv0);
 #ifdef DISABLE_RED
-	textureColor.r = 0.0;
+	value.color.r = 0.0;
 #endif
-	textureColor.a += bias;
-	return textureColor;
+	value.color.a += bias;
+	return value;
 }
 void main() {
-	vec4 color = lighting();
-	gl_FragColor = clamp(color, 0.0, 1.0);
+	Value v = lighting();
+	gl_FragColor = clamp(v.color, 0.0, 1.0);
 }

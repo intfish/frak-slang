@@ -27,7 +27,7 @@
   "dependencies": {
     "commander": "^2.9.0",
     "dependency-graph": "^0.4.1",
-    "glsl-man": "^1.0.4"
+    "glsl-man": "^1.1.5"
   },
   "devDependencies": {
     "tap-spec": "^4.1.0",
