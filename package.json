@@ -25,9 +25,9 @@
   },
   "homepage": "https://github.com/intfish/frak-slang#readme",
   "dependencies": {
-    "commander": "^2.9.0",
+    "commander": "^2.11.0",
     "dependency-graph": "^0.4.1",
-    "glsl-man": "^1.1.7"
+    "glsl-man": "^1.1.11"
   },
   "devDependencies": {
     "tap-spec": "^4.1.0",

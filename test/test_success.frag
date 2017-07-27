@@ -19,9 +19,9 @@ Value lighting() {
 	Value value;
 	value.color = texture2D(diffuse0, uv0);
 #ifdef DISABLE_RED
-	value.color.r = 0.0;
+	(value.color).r = 0.0;
 #endif
-	value.color.a += bias;
+	(value.color).a += bias;
 	return value;
 }
 void main() {
